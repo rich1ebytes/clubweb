@@ -1,0 +1,20 @@
+<svg
+        className="w-8 h-8 md:w-10 md:h-10 text-white"
+        fill="none"
+        stroke="white"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 21.6A9.6 9.6 0 0 1 2.4 12 9.6 9.6 0 0 1 12 2.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+        <path
+          d="M12 2.4A9.6 9.6 0 0 0 21.6 12 9.6 9.6 0 0 0 12 21.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+      </svg>
