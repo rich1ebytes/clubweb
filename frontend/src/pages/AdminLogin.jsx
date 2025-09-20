@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import axios from "axios";
+import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
@@ -34,7 +34,7 @@ export default function AdminLogin() {
     setError(null);
 
     try {
-      const response = await axios.post("/api/admin/login", formData);
+      const response = await api.post("/api/admin/login", formData);
 
       if (response.data.role === "admin") {
         localStorage.setItem("adminToken", response.data.token);

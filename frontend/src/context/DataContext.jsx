@@ -1,6 +1,5 @@
-// src/context/DataContext.jsx
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/api.js'; //
 
 export const DataContext = createContext();
 
@@ -12,15 +11,16 @@ export const DataProvider = ({ children }) => {
 
     const fetchAllData = async () => {
         setLoading(true);
+        setError(null);
         try {
             const [eventsRes, openingsRes] = await Promise.all([
-                axios.get('/api/events/'),
-                axios.get('/api/openings/'),
+                api.get('/events'),   // remove extra '/api' — api.js handles baseURL
+                api.get('/openings'),
             ]);
             setEvents(eventsRes.data);
             setOpenings(openingsRes.data);
         } catch (err) {
-            setError('Failed to fetch data.');
+            setError(err.response?.data?.message || 'Failed to fetch data.');
             console.error(err);
         } finally {
             setLoading(false);
@@ -31,7 +31,6 @@ export const DataProvider = ({ children }) => {
         fetchAllData();
     }, []);
 
-    // The value that will be provided to all components
     const value = { events, openings, loading, error, fetchAllData };
 
     return (

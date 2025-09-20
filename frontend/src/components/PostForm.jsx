@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api/api.js"
 
 const PostForm = ({ type, authToken, onSuccess, item }) => {
   const isEdit = !!item;
@@ -55,23 +55,22 @@ const PostForm = ({ type, authToken, onSuccess, item }) => {
         }
       }
 
-      const baseEndpoint =
-        type === "event"
-          ? "/api/club-members/events"
-          : "/api/club-members/openings";
+        const baseEndpoint =
+            type === "event"
+                ? "/club-members/events"
+                : "/club-members/openings";
       const endpoint = isEdit ? `${baseEndpoint}/${item._id}` : baseEndpoint;
 
-      await axios({
-        method: isEdit ? "put" : "post",
-        url: endpoint,
-        data: formDataToSend,
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+        await api({
+            method: isEdit ? "put" : "post",
+            url: endpoint,
+            data: formDataToSend,
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+            },
+        });
 
-      onSuccess();
+        onSuccess();
       setImage(null);
     } catch (err) {
       setError(err.response?.data?.message || "Failed to create post");
